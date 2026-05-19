@@ -1,0 +1,96 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.SearchModel
+@{
+    Layout = null;
+}
+
+<script src="@Url.Content("~/js/CheckoutScript.js")"></script>
+<link rel="stylesheet" href="~/css/CheckoutStyle.css" asp-append-version="true">
+
+<body>
+
+    <!-- HEADER -->
+    <header class="homebar">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="~/images/Logo.png" alt="Logo">
+            <p>Matrix Inc.</p>
+        </div>
+
+        <!-- Search bar -->
+        <div class="search">
+            <input type="text" placeholder="Zoek producten...">
+        </div>
+
+        <!-- Icons -->
+        <div class="icons">
+
+            <!-- Account -->
+            <img src="~/images/Icon.png" alt="Icon">
+
+            <!-- Wishlist -->
+            <img src="~/images/Wishlist.png" alt="Wishlist">
+
+            <!-- Cart -->
+            <span class="icon" id="cart-icon">
+                <img src="~/images/Cart.png" alt="Cart">
+                <span class="cart-count">0</span>
+            </span>
+
+        </div>
+
+    </header>
+
+    <!-- CART SUMMARY -->
+    <main class="checkout-container">
+
+        <div class="cart-summary-box">
+
+            <h1>Order Summary</h1>
+
+            <!-- Items -->
+            <div class="summary-row">
+                <p>Items</p>
+                <span class="cart-count">0</span>
+            </div>
+
+            <!-- Subtotaal -->
+            <div class="summary-row">
+                <p>Total</p>
+                <span id="cart-total">€0,00</span>
+            </div>
+
+            <!-- Shipping -->
+            <div class="summary-row">
+                <p>Shipping</p>
+                <span id="shippingCost">€4,99</span>
+            </div>
+
+            <!-- VAT -->
+            <div class="summary-row">
+                <p>VAT 21% Included</p>
+                <span id="vat">€0,00</span>
+            </div>
+
+            <hr>
+
+            <!-- Eindtotaal -->
+            <div class="summary-total">
+                <h2>Final Total</h2>
+                <h2 class="finalTotal">€0,00</h2>
+            </div>
+
+            <button class="checkout-button">
+                Proceed to Payment
+            </button>
+
+            <button class="cancel-button" onclick="window.location.href='/'">
+                Cancel Order
+            </button>
+
+        </div>
+
+    </main>
+
+</body>

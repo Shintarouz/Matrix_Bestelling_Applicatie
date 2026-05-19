@@ -1,0 +1,259 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="nl">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestel Platform</title>
+
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HOME BAR -->
+    <header class="homebar">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="~/images/Logo.png" alt="Logo">
+            <p>Matrix Inc.</p>
+        </div>
+
+        <!-- Search bar -->
+        <div class="search">
+            <input type="text" placeholder="Zoek producten...">
+        </div>
+
+        <!-- Icons -->
+        <div class="icons">
+
+            <!-- Account -->
+            <img src="~/images/Icon.png" alt="Icon">
+
+            <!-- Wishlist -->
+            <img src="~/images/Wishlist.png" alt="Wishlist">
+
+            <!-- Cart -->
+            <span class="icon" id="cart-icon">
+                <img src="~/images/Cart.png" alt="Cart">
+                <span class="cart-count">0</span>
+            </span>
+
+        </div>
+
+    </header>
+
+    <main class="shop-layout">
+        <aside class="category-sidebar">
+            <div class="menu-item">
+                Badkamer & sanitair
+
+                <div class="submenu">
+                    <button>Douches</button>
+
+                    <button>Toiletten</button>
+
+                    <button>Kranen</button>
+                </div>
+            </div>
+            
+			<div class="menu-item">
+				Keuken
+
+				<div class="submenu">
+					<button>Keukens</button>
+
+					<button>Apparatuur</button>
+
+					<button>Accessoires</button>
+				</div>
+            </div>
+
+            <div class="menu-item">
+                Woonkamer
+
+                <div class="submenu">
+                    <button>Keukens</button>
+
+                    <button>Apparatuur</button>
+
+                    <button>Accessoires</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                Gast-Kamer
+
+                <div class="submenu">
+                    <button>Keukens</button>
+
+                    <button>Apparatuur</button>
+
+                    <button>Accessoires</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                Tuin
+
+                <div class="submenu">
+                    <button>Keukens</button>
+
+                    <button>Apparatuur</button>
+
+                    <button>Accessoires</button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="product-section">
+
+            @foreach (var product in Model.Products)
+            {
+                <div class="product">
+                    <img src="~/images/@(product.Id).png" alt="@product.Name" />
+
+                    <h2>@product.Name</h2>
+
+				    <p>@product.Description</p>
+
+				    <p>€@product.Price</p>
+
+                    <button onclick="addToCart('@product.Name', @product.Price)">
+                        Bestellen
+                    </button>
+                </div>
+            }
+
+
+        </section>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+
+        <button class="close-cart" id="close-cart">✖</button>
+
+        <div class="cart-title">
+            <img src="~/images/Cart.png" alt="Cart">
+        </div>
+
+        <ul id="cart-items"></ul>
+
+        <h3>
+            Totaal: <span id="cart-total">€0,00</span>
+        </h3>
+
+        <div class="cart-buttons">
+
+            <button id="clear-cart-btn">
+                Winkelwagen legen
+            </button>
+
+            <button id="checkout-btn">
+                Afrekenen
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Address</th>
+            <th>Active</th>
+            <th>Orders</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var c in Model.Customers)
+        {
+            <tr>
+                <td>@c.Name</td>
+                <td>@c.Id</td>
+                <td>@c.Address</td>
+                <td>@c.Active</td>
+
+                <td>
+                    @foreach (var order in c.Orders)
+                    {
+                        <td>@Html.DisplayName(order.Customer.Name.ToString())</td>
+                            @* <td>@Html.DisplayName(order.OrderDate.ToString())</td> *@
+                            @* <td>@Html.DisplayName(order.Id.ToString())</td> *@
+                            @* Order ID: @order.Id <br /> *@
+                            @* Date: @order.OrderDate *@
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <script src="~/js/script.js"></script>
+</table>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+@* @page *@
+@* @model IndexModel *@
+@* @{ *@
+@*     ViewData["Title"] = "Home page"; *@
+@* } *@
+@* <div class="alert-info"> *@
+@*     <p class="p-1"> *@
+@*         Dit project kun je gebruiken als startpunt voor de individuele inleveropdracht: <a href="https://moodle.zuyd.nl/mod/resource/view.php?id=1262065">KE03_INTDEV_SE_1</a> *@
+
+@*         <ul> *@
+@*             <li>Wat ga je maken: Een gebruiksvriendelijk online bestelsysteem voor een klant om producten te bestellen.</li> *@
+@*             <li> *@
+@*                 Hoe ga je dit maken?<br /> *@
+@*                 - Individuele inleveropdracht.<br/> *@
+@*                 - Pas de principes van HCI toe (bijv. Paper prototyping, design principles etc…)<br /> *@
+@*                 - Maak gebruik van: .NET core razor pages met bijbehorende zaken zoals, html, css, js, bootstrap, jquery<br /> *@
+@*                 - Maak gebruik van git en github voor source control van jouw code<br /> *@
+@*             </li> *@
+@*             <li> *@
+@*                 Je krijgt een dal (data access layer) meegeleverd. Qua inhoud is die niet perfect gevuld, maar qua structuur biedt die voldoende om een mooi bestel systeem te kunnen maken. <br />  *@
+@*                 Maar mis je iets, je bent vrij om alles naar wens aan te passen! Ben creatief! *@
+@*             </li> *@
+@*         </ul> *@
+@*     </p> *@
+@* </div> *@
+
+@* <table class="table"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th>Klant</th> *@
+@*             <th>Aantal Orders</th> *@
+@*         </tr> *@
+@*     </thead> *@
+@*     @foreach (var c in Model.Customers) *@
+@*     {         *@
+@*         <tr> *@
+@*             <td>@Html.DisplayName(c.Name)</td> *@
+@*             <td>@Html.DisplayName(c.Orders.Count.ToString())</td>            *@
+@*         </tr> *@
+@*     } *@
+@* </table> *@
