@@ -36,7 +36,7 @@ main.products {
     height: 500px;
 }
 
-.product {
+.product, .parts{
     display: flex;
     flex-direction: column;
 
@@ -48,20 +48,20 @@ main.products {
     text-align: center;
 }
 
-.product img {
+.product img, .parts img {
     width: 200px;
     height: 200px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.product p {
+.product p, .parts p {
     font-size: 15px;
     color: #27ae60;
     margin-bottom: 5px;
 }
 
-.product button {
+.product button, .parts button{
     margin-top: auto;
     align-self: center;
     
@@ -74,7 +74,7 @@ main.products {
     transition: 0.2s;
 }
 
-.product button:hover {
+.product button:hover, .parts button:hover{
     background-color: #219150;
 }
 
@@ -123,6 +123,7 @@ main.products {
     font-size: 16px;
     transition: 0.2s;
 }
+
 
 #clear-cart-btn {
     background-color: #e74c3c;
@@ -226,7 +227,6 @@ main.products {
     height: 28px;
     object-fit: contain;
     font-size: 28px;
-    /* for emoji/cart */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,10 +260,6 @@ main.products {
 
 header {
     height: 80px;
-}
-
-.table {
-    color: yellow
 }
 
 .shop-layout {

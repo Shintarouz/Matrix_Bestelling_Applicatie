@@ -7,18 +7,15 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestel Platform</title>
 
     <link rel="stylesheet" href="~/css/style.css">
-
 </head>
 
 <body>
-
     <!-- HOME BAR -->
     <header class="homebar">
 
@@ -65,17 +62,17 @@
                     <button>Kranen</button>
                 </div>
             </div>
-            
-			<div class="menu-item">
-				Keuken
 
-				<div class="submenu">
-					<button>Keukens</button>
+            <div class="menu-item">
+                Keuken
 
-					<button>Apparatuur</button>
+                <div class="submenu">
+                    <button>Keukens</button>
 
-					<button>Accessoires</button>
-				</div>
+                    <button>Apparatuur</button>
+
+                    <button>Accessoires</button>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -120,21 +117,35 @@
             @foreach (var product in Model.Products)
             {
                 <div class="product">
-                    <img src="~/images/@(product.Id).png" alt="@product.Name" />
+                    <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
 
                     <h2>@product.Name</h2>
 
-				    <p>@product.Description</p>
+                    <p>@product.Description</p>
 
-				    <p>€@product.Price</p>
+                    <p>€@product.Price</p>
 
                     <button onclick="addToCart('@product.Name', @product.Price)">
+                        Bestellen   
+                    </button>
+                </div>
+            }
+            @foreach (var parts in Model.Parts)
+            {
+                <div class="parts">
+                    <img src="~/images/part_@(parts.Id).png" alt="@parts.Name" />
+
+                    <h2>@parts.Name</h2>
+
+                    <p>@parts.Description</p>
+
+                    <p>€5.00</p> @* Hardcoded prijs, moet later vervangen worden.*@
+
+                    <button onclick="addToCart('@parts.Name', 5.00)">
                         Bestellen
                     </button>
                 </div>
             }
-
-
         </section>
     </main>
 
@@ -168,41 +179,7 @@
 
 </body>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Id</th>
-            <th>Address</th>
-            <th>Active</th>
-            <th>Orders</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var c in Model.Customers)
-        {
-            <tr>
-                <td>@c.Name</td>
-                <td>@c.Id</td>
-                <td>@c.Address</td>
-                <td>@c.Active</td>
-
-                <td>
-                    @foreach (var order in c.Orders)
-                    {
-                        <td>@Html.DisplayName(order.Customer.Name.ToString())</td>
-                            @* <td>@Html.DisplayName(order.OrderDate.ToString())</td> *@
-                            @* <td>@Html.DisplayName(order.Id.ToString())</td> *@
-                            @* Order ID: @order.Id <br /> *@
-                            @* Date: @order.OrderDate *@
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-    <script src="~/js/script.js"></script>
-</table>
+<script src="~/js/script.js"></script>
 
 </html>
 

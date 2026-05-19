@@ -18,3 +18,5 @@
     document.getElementById("shippingCost").innerText = `€${shippingCost.toFixed(2)}`;
     document.querySelector(".finalTotal").innerText = `€${finalTotal.toFixed(2)}`;
 });
+
+

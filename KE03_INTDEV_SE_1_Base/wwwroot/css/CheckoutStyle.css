@@ -98,3 +98,18 @@ body {
     font-size: 16px;
     background-color: #e74c3c;
 }
+
+.home-button {
+    background: none;
+    border: none;
+    color: white;
+}
+
+.home-button:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.checkout-button {
+    background-color: #27ae60;
+}
