@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="~/css/CheckoutStyle.css" asp-append-version="true">
 
 <body>
-    <p>Cart items: @Model.CartCount</p>
     <!-- HEADER -->
     <header class="homebar">
 
@@ -20,7 +19,7 @@
             </button>
         </div>  
 
-        <!-- Search bar -->
+        <!-- Search bar --> 
         <div class="search">
             <input type="text" placeholder="Zoek producten...">
         </div>
@@ -37,7 +36,7 @@
             <!-- Cart -->
             <span class="icon" id="cart-icon">
                 <img src="~/images/Cart.png" alt="Cart">
-                <span class="cart-count">0</span>
+                <span>@Model.CartCount</span>
             </span>
 
         </div>
@@ -46,6 +45,48 @@
 
     <!-- CART SUMMARY -->
     <main class="checkout-container">
+        <section class="orders-container">
+
+            <h2>Previous Orders</h2>
+
+            @if (!Model.Orders.Any())
+            {
+                <p>No orders yet.</p>
+            }
+            else
+            {
+                @foreach (var order in Model.Orders)
+                {
+                    <div class="order-card">
+
+                        <h3>Order #@order.Id</h3>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @order.OrderDate.ToString("dd-MM-yyyy HH:mm")
+                        </p>
+
+                        <p>
+                            <strong>Customer ID:</strong>
+                            @order.CustomerId
+                        </p>
+
+                        <h4>Products:</h4>
+
+                        <ul>
+                            @foreach (var product in order.Products)
+                            {
+                                <li>
+                                    @product.Name - €@product.Price
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                }
+            }
+
+        </section>
 
         <div class="cart-summary-box">
 
@@ -54,25 +95,25 @@
             <!-- Items -->
             <div class="summary-row">
                 <p>Items</p>
-                <span class="cart-count">0</span>
+                <span>@Model.CartCount</span>
             </div>
 
             <!-- Subtotaal -->
             <div class="summary-row">
                 <p>Total</p>
-                <span id="cart-total">€0,00</span>
+                <span>€@Model.CartTotal.ToString("0.00")</span>
             </div>
 
             <!-- Shipping -->
             <div class="summary-row">
                 <p>Shipping</p>
-                <span id="shippingCost">€4,99</span>
+                <span>€@Model.ShippingCost.ToString("0.00")</span>
             </div>
 
             <!-- VAT -->
             <div class="summary-row">
                 <p>VAT 21% Included</p>
-                <span id="vat">€0,00</span>
+                <span>€@Model.VAT.ToString("0.00")</span>
             </div>
 
             <hr>
@@ -80,19 +121,58 @@
             <!-- Eindtotaal -->
             <div class="summary-total">
                 <h2>Final Total</h2>
-                <h2 class="finalTotal">€0,00</h2>
+                <h2>€@Model.FinalTotal.ToString("0.00")</h2>
             </div>
 
-            <button class="checkout-button">
-                Proceed to Payment
-            </button>
+            <form method="post" asp-page-handler="Checkout">
+                <button type="submit" class="checkout-button">
+                    Afrekenen
+                </button>
+            </form>
 
             <button class="cancel-button" onclick="window.location.href='/'">
                 Cancel Order
             </button>
 
         </div>
+        <div class="cart-sidebar open"  id="cart-sidebar">
 
+            <button class="close-cart" id="close-cart">✖</button>
+
+            <div class="cart-title">
+                <img src="~/images/Cart.png" alt="Cart">
+            </div>
+
+            @if (!Model.CartItems.Any())
+            {
+                <p>Cart is empty</p>
+            }
+            else
+            {
+                <ul>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <li>
+                            <div>
+                                <strong>@item.Name</strong><br />
+                                €@item.Price x @item.Quantity
+                            </div>
+
+                            <div>
+                                <form method="post" asp-page-handler="RemoveFromCart">
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </div>
+                        </li>
+                    }
+                </ul>
+
+                <h3>
+                    Totaal: €@Model.CartTotal.ToString("0.00")
+                </h3>
+            }
+
+        </div>
     </main>
-
 </body>

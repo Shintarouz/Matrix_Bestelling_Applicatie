@@ -1,22 +1,15 @@
-﻿window.addEventListener("DOMContentLoaded", () => {
+﻿document.addEventListener("DOMContentLoaded", () => {
 
-    let cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
-    let cartTotal = parseFloat(localStorage.getItem("cartTotal")) || 0;
+    const cartIcon = document.getElementById("cart-icon");
+    const cartSidebar = document.getElementById("cart-sidebar");
+    const closeCart = document.getElementById("close-cart");
 
-    const shippingCost = 4.99;
-
-    const vat = cartTotal * 0.21;
-
-    const finalTotal = cartTotal + shippingCost;
-
-    document.querySelectorAll(".cart-count").forEach(el => {
-        el.innerText = cartCount;
+    cartIcon.addEventListener("click", () => {
+        cartSidebar.classList.toggle("open");
     });
 
-    document.getElementById("vat").innerText = `€${vat.toFixed(2)}`;
-    document.getElementById("cart-total").innerText = `€${cartTotal.toFixed(2)}`;
-    document.getElementById("shippingCost").innerText = `€${shippingCost.toFixed(2)}`;
-    document.querySelector(".finalTotal").innerText = `€${finalTotal.toFixed(2)}`;
+    closeCart.addEventListener("click", () => {
+        cartSidebar.classList.remove("open");
+    });
+
 });
-
-

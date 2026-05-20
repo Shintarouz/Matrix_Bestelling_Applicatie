@@ -43,24 +43,12 @@
             <!-- Cart -->
             <span class="icon" id="cart-icon">
                 <img src="~/images/Cart.png" alt="Cart">
-                <span class="cart-count">0</span>
+                <span>@Model.CartCount</span>
             </span>
 
         </div>
 
     </header>
-
-    <form method="post">
-        <button type="submit" asp-page-handler="AddProduct">
-            Add Test Product
-        </button>
-    </form>
-
-    <form method="post" asp-page-handler="AddTestItem">
-        <button type="submit">Add Test Item</button>
-    </form>
-
-    <p>Cart items: @Model.CartCount</p>
 
     <main class="shop-layout">
         <aside class="category-sidebar">
@@ -138,9 +126,15 @@
 
                     <p>€@product.Price</p>
 
-                    <button onclick="addToCart('@product.Name', @product.Price)">
-                        Bestellen   
-                    </button>
+                    <form method="post" asp-page-handler="AddToCart">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <input type="hidden" name="name" value="@product.Name" />
+                        <input type="hidden" name="price" value="@product.Price" />
+
+                        <button type="submit">
+                            Bestellen
+                        </button>
+                    </form>
                 </div>
             }
             @foreach (var parts in Model.Parts)
@@ -170,19 +164,39 @@
             <img src="~/images/Cart.png" alt="Cart">
         </div>
 
-        <ul id="cart-items"></ul>
+        @if (!Model.CartItems.Any())
+        {
+            <p>Cart is empty</p>
+        }
+        else
+        {
+            <ul>
+                @foreach (var item in Model.CartItems)
+                {
+                    <li>
+                        <div>
+                            <strong>@item.Name</strong><br />
+                            €@item.Price x @item.Quantity
+                        </div>
 
-        <h3>
-            Totaal: <span id="cart-total">€0,00</span>
-        </h3>
+                        <div>
+                            <form method="post" asp-page-handler="RemoveFromCart">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit">Remove</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <h3>
+                Totaal: €@Model.CartTotal.ToString("0.00")
+            </h3>
+        }
 
         <div class="cart-buttons">
 
-            <button id="clear-cart-btn">
-                Winkelwagen legen
-            </button>
-
-            <button id="checkout-btn">
+            <button class="checkout-button"onclick="window.location.href='/Checkout'">
                 Afrekenen
             </button>
 

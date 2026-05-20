@@ -1,7 +1,6 @@
 using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
-using DataAccessLayer.Services;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +22,16 @@ namespace KE03_INTDEV_SE_1_Base
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IPartRepository, PartRepository>();
-            builder.Services.AddSingleton<CartService>();
+
+            builder.Services.AddDistributedMemoryCache();
+
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -52,6 +60,7 @@ namespace KE03_INTDEV_SE_1_Base
 
             app.UseRouting();
 
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapRazorPages();

@@ -1,21 +1,127 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DataAccessLayer.Services;
+using DataAccessLayer.Models;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using KE03_INTDEV_SE_1_Base.Helpers;
+using System;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
 {
     public class SearchModel : PageModel
     {
-        private readonly CartService _cartService;
-        public SearchModel(CartService cartService)
+        private readonly MatrixIncDbContext _context;
+
+        public SearchModel(MatrixIncDbContext context)
         {
-            _cartService = cartService;
+            _context = context;
         }
-        public int CartCount => _cartService.Items.Count;
+        public List<CartItem> CartItems { get; set; } = new();
+        public List<Order> Orders { get; set; } = new();
+        public decimal CartTotal { get; set; }
+        public decimal ShippingCost { get; set; } = 4.99m;
+        public decimal VAT { get; set; }
+        public decimal FinalTotal { get; set; }
+
+        public int CartCount => CartItems.Sum(x => x.Quantity);
 
         public void OnGet()
         {
+            CartItems = HttpContext.Session.GetObject<List<CartItem>>("cart") ?? new List<CartItem>();
 
+            CartTotal = CartItems.Sum(x => x.Price * x.Quantity);
+            VAT = CartTotal * 0.21m;
+            FinalTotal = CartTotal + ShippingCost;
+            Orders = _context.Orders
+                .Include(o => o.Products)
+                .Include(o => o.Customer)
+                .OrderByDescending(o => o.OrderDate)
+                .ToList();
+        }
+
+        public IActionResult OnPostAddToCart(int productId, string name, decimal price)
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItem>>("cart")
+               ?? new List<CartItem>();
+
+            var existingItem = cart.FirstOrDefault(x => x.ProductId == productId);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                cart.Add(new CartItem
+                {
+                    ProductId = productId,
+                    Name = name,
+                    Price = price,
+                    Quantity = 1
+                });
+            }
+
+            HttpContext.Session.SetObject("cart", cart);
+
+            return RedirectToPage(); // refresh page
+        }
+
+        public async Task<IActionResult> OnPostRemoveFromCart(int productId)
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItem>>("cart")
+                ?? new List<CartItem>();
+
+            var item = cart.FirstOrDefault(x => x.ProductId == productId);
+
+            if (item != null)
+            {
+                cart.Remove(item);
+            }
+
+            HttpContext.Session.SetObject("cart", cart);
+
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostCheckout()
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItem>>("cart")
+                ?? new List<CartItem>();
+
+            if (!cart.Any())
+            {
+                return RedirectToPage();
+            }
+
+            // Temporary customer id
+            // Replace later with logged-in user id
+            int customerId = 1;
+
+            var order = new Order
+            {
+                OrderDate = DateTime.Now,
+                CustomerId = customerId
+            };
+
+            foreach (var item in cart)
+            {
+                var product = await _context.Products
+                    .FirstOrDefaultAsync(p => p.Id == item.ProductId);
+
+                if (product != null)
+                {
+                    order.Products.Add(product);
+                }
+            }
+
+            _context.Orders.Add(order);
+
+            await _context.SaveChangesAsync();
+
+            // Clear cart
+            HttpContext.Session.Remove("cart");
+
+            return RedirectToPage();
         }
     }
 }
