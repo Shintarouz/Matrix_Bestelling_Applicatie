@@ -1,6 +1,8 @@
 using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
+using DataAccessLayer.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace KE03_INTDEV_SE_1_Base
@@ -21,6 +23,7 @@ namespace KE03_INTDEV_SE_1_Base
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IPartRepository, PartRepository>();
+            builder.Services.AddSingleton<CartService>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();

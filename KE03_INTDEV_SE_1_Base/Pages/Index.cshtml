@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/css/style.css">
 </head>
 
+
 <body>
     <!-- HOME BAR -->
     <header class="homebar">
@@ -48,6 +49,18 @@
         </div>
 
     </header>
+
+    <form method="post">
+        <button type="submit" asp-page-handler="AddProduct">
+            Add Test Product
+        </button>
+    </form>
+
+    <form method="post" asp-page-handler="AddTestItem">
+        <button type="submit">Add Test Item</button>
+    </form>
+
+    <p>Cart items: @Model.CartCount</p>
 
     <main class="shop-layout">
         <aside class="category-sidebar">
