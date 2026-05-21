@@ -33,10 +33,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             VAT = CartTotal * 0.21m;
             FinalTotal = CartTotal + ShippingCost;
             Orders = _context.Orders
-                .Include(o => o.Products)
-                .Include(o => o.Customer)
-                .OrderByDescending(o => o.OrderDate)
-                .ToList();
+                    .Include(o => o.Customer)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
+                    .OrderByDescending(o => o.OrderDate)
+                    .ToList();
         }
 
         public IActionResult OnPostAddToCart(int productId, string name, decimal price)
@@ -105,13 +106,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             foreach (var item in cart)
             {
-                var product = await _context.Products
-                    .FirstOrDefaultAsync(p => p.Id == item.ProductId);
-
-                if (product != null)
+                order.OrderItems.Add(new OrderItem
                 {
-                    order.Products.Add(product);
-                }
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                });
             }
 
             _context.Orders.Add(order);

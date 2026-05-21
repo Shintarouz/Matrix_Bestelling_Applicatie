@@ -15,7 +15,9 @@ namespace KE03_INTDEV_SE_1_Base
             // We gebruiken voor nu even een SQLite voor de database,
             // omdat deze eenvoudig lokaal te gebruiken is en geen extra configuratie nodig heeft.
             builder.Services.AddDbContext<MatrixIncDbContext>(
-                options => options.UseSqlite("Data Source=MatrixInc.db"));
+                options => options.UseSqlite(
+                    "Data Source=MatrixInc.db",
+                    b => b.MigrationsAssembly("KE03_INTDEV_SE_1_Base")));
 
             // We registreren de repositories in de DI container
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();

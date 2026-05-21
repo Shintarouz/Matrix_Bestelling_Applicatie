@@ -74,10 +74,10 @@
                         <h4>Products:</h4>
 
                         <ul>
-                            @foreach (var product in order.Products)
+                            @foreach (var item in order.OrderItems)
                             {
                                 <li>
-                                    @product.Name - €@product.Price
+                                    @item.Product.Name - €@item.Price x @item.Quantity
                                 </li>
                             }
                         </ul>
