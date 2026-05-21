@@ -118,9 +118,14 @@
             @foreach (var product in Model.Products)
             {
                 <div class="product">
-                    <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
+                    <a asp-page="/Products/Details"
+                        asp-route-id="@product.Id">
+                        <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
 
-                    <h2>@product.Name</h2>
+                        <a asp-page="/Product" asp-route-id="@product.Id">
+                            <h2>@product.Name</h2>
+                        </a>
+                    </a>
 
                     <p>@product.Description</p>
 

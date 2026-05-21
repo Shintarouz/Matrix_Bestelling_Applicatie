@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model KE03_INTDEV_SE_1_Base.Pages.ProductModel
+
+
+<link rel="stylesheet" href="~/css/ProductPage.css">
+
+@{
+
+    <h1>@Model.Product.Name</h1>
+
+    <img src="~/images/product_@(Model.Product.Id).png"
+         alt="@Model.Product.Name" />
+
+    <p>@Model.Product.Description</p>
+
+    <p>€@Model.Product.Price</p>
+}
