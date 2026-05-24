@@ -35,7 +35,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             Orders = _context.Orders
                     .Include(o => o.Customer)
                     .Include(o => o.OrderItems)
-                        .ThenInclude(oi => oi.Product)
+                    .ThenInclude(oi => oi.Product)
                     .OrderByDescending(o => o.OrderDate)
                     .ToList();
         }
