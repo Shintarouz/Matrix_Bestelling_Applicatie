@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="~/css/ProductPage.css">
 
 @{
-
     <h1>@Model.Product.Name</h1>
 
-    <img src="~/images/product_@(Model.Product.Id).png"
+    <img class="product-image"
+         src="~/images/product_@(Model.Product.Id).png"
          alt="@Model.Product.Name" />
 
     <p>@Model.Product.Description</p>

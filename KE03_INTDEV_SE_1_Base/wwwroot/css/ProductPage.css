@@ -5,13 +5,19 @@ body {
     padding: 0;
 }
 
+.product-image {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
 h1 {
     text-align: center;
     margin-top: 30px;
     color: #333;
 }
 
-img {
+/*img {
     display: block;
     margin: 20px auto;
     max-width: 300px;
@@ -20,7 +26,7 @@ img {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     background-color: white;
     padding: 10px;
-}
+}*/
 
 p {
     text-align: center;

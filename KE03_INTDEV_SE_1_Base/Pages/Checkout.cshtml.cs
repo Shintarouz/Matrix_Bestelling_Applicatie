@@ -67,7 +67,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             return RedirectToPage(); // refresh page
         }
 
-        public async Task<IActionResult> OnPostRemoveFromCart(int productId)
+        public IActionResult OnPostRemoveFromCart(int productId)
         {
             var cart = HttpContext.Session.GetObject<List<CartItem>>("cart")
                 ?? new List<CartItem>();
@@ -96,7 +96,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             // Temporary customer id
             // Replace later with logged-in user id
-            int customerId = 1;
+            int customerId = 2;
 
             var order = new Order
             {

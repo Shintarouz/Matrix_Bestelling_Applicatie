@@ -142,22 +142,7 @@
                     </form>
                 </div>
             }
-            @foreach (var parts in Model.Parts)
-            {
-                <div class="parts">
-                    <img src="~/images/part_@(parts.Id).png" alt="@parts.Name" />
 
-                    <h2>@parts.Name</h2>
-
-                    <p>@parts.Description</p>
-
-                    <p>€5.00</p> @* Hardcoded prijs, moet later vervangen worden.*@
-
-                    <button onclick="addToCart('@parts.Name', 5.00)">
-                        Bestellen
-                    </button>
-                </div>
-            }
         </section>
     </main>
 
