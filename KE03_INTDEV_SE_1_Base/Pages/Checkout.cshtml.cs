@@ -91,7 +91,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             if (!cart.Any())
             {
-                return RedirectToPage();
+                return RedirectToPage("/FinishOrder");
             }
 
             // Temporary customer id
@@ -129,7 +129,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             // Clear cart
             HttpContext.Session.Remove("cart");
 
-            return RedirectToPage();
+            return RedirectToPage("/FinishOrder");
         }
     }
 }

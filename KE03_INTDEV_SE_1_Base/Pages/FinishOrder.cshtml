@@ -1,0 +1,76 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.SearchModel
+
+
+<script src="@Url.Content("~/js/CheckoutScript.js")"></script>
+<link rel="stylesheet" href="~/css/OrderDetail.css" asp-append-version="true">
+
+<section class="checkout-section">
+    <h2 class="section-title">Payment method</h2>
+
+    <div class="section-box">
+        <div class="option-card active">
+            <h3>ING</h3>
+            <p>Pay with ING</p>
+        </div>
+
+        <div class="option-card">
+            <h3>Rabo</h3>
+            <p>Pay With Rabo</p>
+        </div>
+
+        <button class="change-btn">
+			Change payment method
+        </button>
+    </div>
+</section>
+
+<section class="checkout-section">
+    <h2 class="section-title">Adress</h2>
+
+    <div class="section-box">
+        <div class="option-card">
+            <h3>John Doe</h3>
+            <p>Heerdreef 56</p>
+            <p>6456 FR Den Haag</p>
+        </div>
+
+        <div class="option-card active">
+            <h3>Sara Doe</h3>
+            <p>Platenstraat 46A</p>
+            <p>6467 EZ Amsterdam</p>
+        </div>
+
+        <button class="change-btn">
+            Change adress
+        </button>
+    </div>
+</section>
+
+<section class="checkout-section">
+    <h2 class="section-title">Delivery moment</h2>
+
+    <div class="section-box">
+        <div class="option-card">
+            <h3>Monday</h3>
+            <p>6 July</p>
+            <p>15.00 - 22.00</p>
+        </div>
+
+        <div class="option-card">
+            <h3>Friday</h3>
+            <p>10 July</p>
+            <p>15.00 - 22.00</p>
+        </div>
+
+        <button class="change-btn";>
+			Change delivery moment
+        </button>
+    </div>
+
+    <div>
+        <button class="change-btn">
+            Finish payment
+        </button>
+    </div>
+</section>
