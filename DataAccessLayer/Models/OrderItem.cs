@@ -19,5 +19,8 @@ namespace DataAccessLayer.Models
         public int Quantity { get; set; }
 
         public decimal Price { get; set; }
+        public bool isPackaged { get; set; } = false;
+        public List<Package> Packages { get; set; } = new();
     }
 }
+

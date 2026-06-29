@@ -19,5 +19,7 @@ namespace DataAccessLayer.Models
         public bool NewOrder { get; set; } = true;
         public bool IsShipped { get; set; } = false;
         public List<OrderItem> OrderItems { get; set; } = new();
+        public int? DeliveryId { get; set; }
+        public Delivery? Delivery { get; set; } = null!;
     }
 }
