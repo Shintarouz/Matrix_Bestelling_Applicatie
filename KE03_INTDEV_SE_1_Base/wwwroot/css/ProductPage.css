@@ -289,7 +289,7 @@ body {
     }
 
 .label {
-    background-color: lightgreen;
+    background-color: #d4f5d4;
     border-radius: 8px;
     border: none;
 }
@@ -307,10 +307,10 @@ body {
 }
 
 
-.how-many{
+.how-many {
     width: 100px;
     height: 40px;
-    background-color: lightgreen;
+    background-color: #d4f5d4;
     border: none;
     border-radius: 8px;
 }

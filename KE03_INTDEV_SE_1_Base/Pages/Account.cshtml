@@ -1,0 +1,79 @@
+﻿@page 
+@model AccountModel
+
+<link rel="stylesheet" href="~/css/OrderDetail.css" asp-append-version="true">
+
+<body>
+    <section class="order-container">
+
+        <div class="order-card">
+
+            <h2>Account</h2>
+
+            <p><strong>Username:</strong> JohnDoe</p>
+
+            <p><strong>Email:</strong> larsJhonDoe@gmail.com</p>
+
+            <p><strong>Address:</strong> Brunssum, Netherlands, 6487FF</p>
+
+            <p><strong>Password:</strong> ••••••••</p>
+
+        </div>
+
+    </section>
+    
+        <section class="orders-container">
+        <div class="orders-header">
+
+            <h2>Previous Orders</h2>
+
+            <img src="~/images/filteren.png" alt="Filter Icon" class="filter-icon">
+
+        </div>
+
+            @if (!Model.Orders.Any())
+            {
+                <p>No orders yet.</p>
+            }
+            else
+            {
+                @foreach (var order in Model.Orders)
+                {
+                    <div class="order-card">
+
+                        <h3>Order #@order.Id</h3>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @order.OrderDate.ToString("dd-MM-yyyy HH:mm")
+                        </p>
+
+                        <p>
+                            <strong>Customer ID:</strong>
+                            @order.CustomerId
+                        </p>
+
+                        <h4>Products:</h4>
+
+                        <ul>
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li>
+                                    @item.Product.Name - €@item.Price x @item.Quantity
+                                </li>
+                            }
+                        </ul>
+
+                        <a asp-page="/OrderDetail"
+                           asp-route-id="@order.Id"
+                           class="add-to-cart">
+                            View Order Details
+                        </a>
+
+                    </div>
+                }
+            }
+
+        </section>
+
+</body>
