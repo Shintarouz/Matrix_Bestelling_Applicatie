@@ -1,0 +1,47 @@
+﻿@page "{id:int}"
+@model OrderDetailModel
+
+<link rel="stylesheet" href="~/css/OrderDetail.css" asp-append-version="true">
+
+<body>
+
+    <div class="order-title">
+        <h1>Order #@Model.Order.Id</h1>
+    </div>
+
+    <div class="order-container">
+
+        <p>Date: @Model.Order.OrderDate</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>€ per unit</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Order.OrderItems)
+                {
+                    <tr>
+                        <td>@item.Product?.Name</td>
+                        <td>€@item.Price.ToString("0.00")</td>
+                        <td>@item.Quantity</td>
+                        <td>€@((item.Price * item.Quantity).ToString("0.00"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3>Total: €@Model.OrderTotal.ToString("0.00")</h3>
+
+    </div>
+
+
+
+
+
+</body>
