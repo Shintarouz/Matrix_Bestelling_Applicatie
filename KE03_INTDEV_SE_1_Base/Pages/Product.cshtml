@@ -5,13 +5,53 @@
 <link rel="stylesheet" href="~/css/ProductPage.css">
 
 @{
-    <h1>@Model.Product.Name</h1>
+    <div class="product-container">
 
-    <img class="product-image"
-         src="~/images/product_@(Model.Product.Id).png"
-         alt="@Model.Product.Name" />
+        <div class="product-left">
+            <img class="product-image"
+                 src="~/images/product_@(Model.Product.Id).png"
+                 alt="@Model.Product.Name" />
+        </div>
+        <div class="product-info">
+        
+        </div>
+        <div class="product-right">
+            <h1>@Model.Product.Name</h1>
 
-    <p>@Model.Product.Description</p>
+            <p class="price">€@Model.Product.Price</p>
+            <label class="label"> In stock <br/>
+                Order before 19:00, delivered tomorrow
+            </label>
+            <label class="options"> Description: <br />
+                <a>@Model.Product.Description</a>
+            </label>
+           
+            
 
-    <p>€@Model.Product.Price</p>
-}
+            <div class="options">
+                <label>Lengte:</label>
+                <div class="option-group">
+                    <button>20</button>
+                    <button>30</button>
+                    <button>40</button>
+                </div>
+
+                <label>Diameter:</label>
+                <div class="option-group">
+                    <button>5</button>
+                    <button>6</button>
+                </div>
+            </div>
+            <div class="product-actions">
+                <img class="wishlist" src="~/images/Wishlist.png" alt="Wishlist">
+
+                <button class="how-many">
+                    -   1   +
+                </button>
+            </div>
+            <button class="add-to-cart">In winkelwagen
+            </button>
+        </div>
+
+    </div>
+    }

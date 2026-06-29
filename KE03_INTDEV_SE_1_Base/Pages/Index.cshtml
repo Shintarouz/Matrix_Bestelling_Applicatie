@@ -1,8 +1,5 @@
 ﻿@page
 @model IndexModel
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -17,7 +14,7 @@
 
 
 <body>
-    <!-- HOME BAR -->
+    @* <!-- HOME BAR -->
     <header class="homebar">
 
         <!-- Logo -->
@@ -48,7 +45,7 @@
 
         </div>
 
-    </header>
+    </header> *@
 
     <main class="shop-layout">
         <aside class="category-sidebar">
@@ -121,7 +118,6 @@
                     <a asp-page="/Products/Details"
                         asp-route-id="@product.Id">
                         <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
-
                         <a asp-page="/Product" asp-route-id="@product.Id">
                             <h2>@product.Name</h2>
                         </a>
@@ -181,6 +177,8 @@
 
             <h3>
                 Totaal: €@Model.CartTotal.ToString("0.00")
+                 <a class="nav-link text-dark" asp-area="" asp-page="/Checkout">Checkout</a>
+
             </h3>
         }
 
@@ -188,6 +186,7 @@
 
             <button class="checkout-button"onclick="window.location.href='/Checkout'">
                 Afrekenen
+               
             </button>
 
         </div>

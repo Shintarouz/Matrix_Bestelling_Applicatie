@@ -1,4 +1,6 @@
 ﻿<!DOCTYPE html>
+@using DataAccessLayer.Models
+@using KE03_INTDEV_SE_1_Base.Helpers
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,17 +9,16 @@
     <title>@ViewData["Title"]</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>
 <body>
     <header class="homebar">
 
         <!-- Logo -->
         <div class="logo">
-            <button class="home-button" onclick="window.location.href='/'">
-                <img src="~/images/Logo.png" alt="Logo">
-                <p>Matrix Inc.</p>
-            </button>
+                @* <img src="~/images/Logo.png" alt="Logo"> *@
+            <a class="nav-link text-dark" asp-area="" asp-page="/Index"><img src="~/images/Logo.png" alt="Logo"></a>
+            <p>Matrix Inc.</p>
         </div>
 
         <!-- Search bar -->
@@ -25,8 +26,13 @@
             <input type="text" placeholder="Zoek producten...">
         </div>
 
+       
+     
         <!-- Icons -->
         <div class="icons">
+
+            <!-- Filter option-->
+            <img src="~/images/filteren.png" alt="Icon">
 
             <!-- Account -->
             <img src="~/images/Icon.png" alt="Icon">
@@ -37,7 +43,13 @@
             <!-- Cart -->
             <span class="icon" id="cart-icon">
                 <img src="~/images/Cart.png" alt="Cart">
-                @* <span>@Model.CartCount</span> *@
+                @{
+                        var cart = Context.Session.GetObject<List<CartItem>>("cart") ?? new List<CartItem>();
+                        var cartCount = cart.Sum(x => x.Quantity);
+
+                }
+
+                <span>@cartCount</span>
             </span>
 
         </div>

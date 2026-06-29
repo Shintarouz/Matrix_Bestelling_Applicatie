@@ -1,14 +1,12 @@
 ﻿@page
 @model KE03_INTDEV_SE_1_Base.Pages.SearchModel
-@{
-    Layout = null;
-}
+
 
 <script src="@Url.Content("~/js/CheckoutScript.js")"></script>
 <link rel="stylesheet" href="~/css/CheckoutStyle.css" asp-append-version="true">
 
 <body>
-    <!-- HEADER -->
+    @* <!-- HEADER -->
     <header class="homebar">
 
         <!-- Logo -->
@@ -41,7 +39,7 @@
 
         </div>
 
-    </header>
+    </header> *@
 
     <!-- CART SUMMARY -->
     <main class="checkout-container">
@@ -81,6 +79,12 @@
                                 </li>
                             }
                         </ul>
+
+                        <a asp-page="/OrderDetail"
+                           asp-route-id="@order.Id"
+                           class="details-button">
+                            View Order Details
+                        </a>
 
                     </div>
                 }
