@@ -12,9 +12,7 @@ namespace DataAccessLayer
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        //public DbSet<Part> Parts { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Package> Packages { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,5 +43,6 @@ namespace DataAccessLayer
 
         //    base.OnModelCreating(modelBuilder);
         //}
+        public DbSet<Delivery> Deliveries { get; set; }
     }
 }
