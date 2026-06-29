@@ -97,11 +97,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             // Temporary customer id
             // Replace later with logged-in user id
             int customerId = 2;
+    //        var delivery = await _context.Deliveries
+    //.FirstOrDefaultAsync(d => d.Id == deliveryId);
 
+    //        if (delivery == null)
+    //        {
+    //            return Content($"Delivery {deliveryId} does not exist");
+    //        }
             var order = new Order
             {
                 OrderDate = DateTime.Now,
-                CustomerId = customerId
+                CustomerId = customerId,
+           //     DeliveryId = delivery.Id
             };
 
             foreach (var item in cart)
@@ -110,7 +117,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
-                    Price = item.Price
+                    Price = item.Price,
+
                 });
             }
 

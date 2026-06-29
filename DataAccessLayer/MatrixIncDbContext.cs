@@ -14,6 +14,8 @@ namespace DataAccessLayer
         public DbSet<Product> Products { get; set; }
         //public DbSet<Part> Parts { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<Package> Packages { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

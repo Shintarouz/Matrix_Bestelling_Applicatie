@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication35.Models;
 
 namespace DataAccessLayer.Models
 {
@@ -16,7 +17,9 @@ namespace DataAccessLayer.Models
 
         public string? Description { get; set; }
 
-        public string? Category { get; set; }
+        public int CategoryId { get; set; }
+
+        public Category? Category { get; set; }
 
     }
     //public class Product

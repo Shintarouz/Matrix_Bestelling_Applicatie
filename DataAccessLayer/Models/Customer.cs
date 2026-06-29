@@ -14,9 +14,11 @@ namespace DataAccessLayer.Models
         public int Id { get; set; }
 
         [Required]
-        public string? userName { get; set; }
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Description may only contain letters.")]
+        public required string userName { get; set; }
 
         [Required]
+        [RegularExpression(@"^\d{4}\s?[A-Za-z]{2}$", ErrorMessage = "Address must be in Dutch format (e.g. 1234 AB).")]
         public string? Address { get; set; }
 
         public bool Active { get; set; }
