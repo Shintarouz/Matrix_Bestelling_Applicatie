@@ -39,32 +39,35 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
 
         }
+        public IActionResult OnPostUpdateQuantity(int productId, int quantity)
+        {
+            LoadCart();
 
-        // voor nieuwe producten aan te maken in de database
-        //public IActionResult OnPostAddProduct()
-        //{
-        //    var product = new Product
-        //    {
-        //        Name = "New Product",
-        //        Description = "This is a new product",
-        //        Price = 19.99m
-        //    };
-        //    _productRepository.AddProduct(product);
-        //    return RedirectToPage();
-        //}
+            var item = CartItems.FirstOrDefault(i => i.ProductId == productId);
 
-        //public IActionResult OnPostAddTestItem()
-        //{
-        //    _cartService.Items.Add(new CartItem
-        //    {
-        //        Id = 1,
-        //        Name = "Test Product",
-        //        Price = 10,
-        //        Quantity = 1
-        //    });
+            if (item != null)
+            {
+                if (quantity <= 0)
+                {
+                    CartItems.Remove(item);
+                }
+                else
+                {
+                    item.Quantity = quantity;
+                }
+            }
 
-        //    return RedirectToPage();
-        //}
+            SaveCart();
+
+            return RedirectToPage();
+        }
+
+        private void SaveCart()
+        {
+            HttpContext.Session.SetObject("cart", CartItems);
+            CartTotal = CartItems.Sum(x => x.Price * x.Quantity);
+        }
+
         public void OnGet()
         {            
             Customers = _customerRepository.GetAllCustomers().ToList();        
@@ -80,7 +83,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             _logger.LogInformation($"Customers: {Customers.Count}, Products: {Products.Count}");
 
         }
-        public IActionResult OnPostAddToCart(int productId, string name, decimal price)
+        public IActionResult OnPostAddToCart(int productId, string name, decimal price, int quantity)
         {
             var cart = HttpContext.Session.GetObject<List<CartItem>>("cart")
                        ?? new List<CartItem>();
@@ -89,7 +92,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             if (existing != null)
             {
-                existing.Quantity++;
+                existing.Quantity += quantity;
             }
             else
             {
@@ -98,7 +101,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                     ProductId = productId,
                     Name = name,
                     Price = price,
-                    Quantity = 1
+                    Quantity = quantity
 
                 });
             }

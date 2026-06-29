@@ -13,3 +13,14 @@
     });
 
 });
+
+function changeQty(button, change) {
+    const input = button.parentElement.querySelector("input[name='quantity']");
+    let value = parseInt(input.value) || 1;
+
+    value += change;
+
+    if (value < 1) value = 1;
+
+    input.value = value;
+}

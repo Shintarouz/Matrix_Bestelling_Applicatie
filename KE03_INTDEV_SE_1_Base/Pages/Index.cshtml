@@ -116,7 +116,7 @@
             {
                 <div class="product">
                     <a asp-page="/Products/Details"
-                        asp-route-id="@product.Id">
+                    asp-route-id="@product.Id">
                         <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
                         <a asp-page="/Product" asp-route-id="@product.Id">
                             <h2>@product.Name</h2>
@@ -132,8 +132,17 @@
                         <input type="hidden" name="name" value="@product.Name" />
                         <input type="hidden" name="price" value="@product.Price" />
 
+                        <div class="quantity-selector">
+
+                            <input type="number"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            class="qty-input" />
+
+                        </div>
                         <button type="submit">
-                            Bestellen
+                            Add to cart
                         </button>
                     </form>
                 </div>
@@ -162,11 +171,23 @@
                     <li>
                         <div>
                             <strong>@item.Name</strong><br />
-                            €@item.Price x @item.Quantity
                         </div>
 
-                        <div>
-                            <form method="post" asp-page-handler="RemoveFromCart">
+                        <div class="quantity-controls">
+
+                            <form method="post" asp-page-handler="UpdateQuantity" style="display:inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+
+                                <input type="number"
+                                       name="quantity"
+                                       value="@item.Quantity"
+                                       min="1"
+                                       style="width:60px;" />
+
+                                <button type="submit">Update</button>
+                            </form>
+
+                            <form method="post" asp-page-handler="RemoveFromCart" style="display:inline;">
                                 <input type="hidden" name="productId" value="@item.ProductId" />
                                 <button type="submit">Remove</button>
                             </form>
@@ -198,55 +219,3 @@
 <script src="~/js/script.js"></script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-@* @page *@
-@* @model IndexModel *@
-@* @{ *@
-@*     ViewData["Title"] = "Home page"; *@
-@* } *@
-@* <div class="alert-info"> *@
-@*     <p class="p-1"> *@
-@*         Dit project kun je gebruiken als startpunt voor de individuele inleveropdracht: <a href="https://moodle.zuyd.nl/mod/resource/view.php?id=1262065">KE03_INTDEV_SE_1</a> *@
-
-@*         <ul> *@
-@*             <li>Wat ga je maken: Een gebruiksvriendelijk online bestelsysteem voor een klant om producten te bestellen.</li> *@
-@*             <li> *@
-@*                 Hoe ga je dit maken?<br /> *@
-@*                 - Individuele inleveropdracht.<br/> *@
-@*                 - Pas de principes van HCI toe (bijv. Paper prototyping, design principles etc…)<br /> *@
-@*                 - Maak gebruik van: .NET core razor pages met bijbehorende zaken zoals, html, css, js, bootstrap, jquery<br /> *@
-@*                 - Maak gebruik van git en github voor source control van jouw code<br /> *@
-@*             </li> *@
-@*             <li> *@
-@*                 Je krijgt een dal (data access layer) meegeleverd. Qua inhoud is die niet perfect gevuld, maar qua structuur biedt die voldoende om een mooi bestel systeem te kunnen maken. <br />  *@
-@*                 Maar mis je iets, je bent vrij om alles naar wens aan te passen! Ben creatief! *@
-@*             </li> *@
-@*         </ul> *@
-@*     </p> *@
-@* </div> *@
-
-@* <table class="table"> *@
-@*     <thead> *@
-@*         <tr> *@
-@*             <th>Klant</th> *@
-@*             <th>Aantal Orders</th> *@
-@*         </tr> *@
-@*     </thead> *@
-@*     @foreach (var c in Model.Customers) *@
-@*     {         *@
-@*         <tr> *@
-@*             <td>@Html.DisplayName(c.Name)</td> *@
-@*             <td>@Html.DisplayName(c.Orders.Count.ToString())</td>            *@
-@*         </tr> *@
-@*     } *@
-@* </table> *@
