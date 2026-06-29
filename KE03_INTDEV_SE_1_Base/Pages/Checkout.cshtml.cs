@@ -96,7 +96,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             // Temporary customer id
             // Replace later with logged-in user id
-            int customerId = 2;
+            int customerId = 1;
     //        var delivery = await _context.Deliveries
     //.FirstOrDefaultAsync(d => d.Id == deliveryId);
 

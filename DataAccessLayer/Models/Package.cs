@@ -11,7 +11,6 @@ namespace DataAccessLayer.Models
         public int Id { get; set; }
         public string Barcode { get; set; } 
         public int PackageNmbr { get; set; }
-        public int OrderItemID { get; set; }
         public int OrderItemId { get; set; }
         public OrderItem OrderItem { get; set; } = null!;
     }

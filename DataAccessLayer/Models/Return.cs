@@ -12,6 +12,7 @@ namespace DataAccessLayer.Models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public bool NewReturn { get; set; } = true;
         public List<Product> ReturnProducts { get; set; } = new List<Product>();
     }
 }
