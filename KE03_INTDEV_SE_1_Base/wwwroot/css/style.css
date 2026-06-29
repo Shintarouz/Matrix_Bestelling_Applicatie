@@ -97,16 +97,17 @@ main.products {
     gap: 15px;
 }
 
-.icons img,
-.icons .icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .icons img,
+    .icons .icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 
 
 .logo {

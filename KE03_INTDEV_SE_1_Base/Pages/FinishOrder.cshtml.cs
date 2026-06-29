@@ -16,5 +16,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         {
             _context = context;
         }
+        public async Task<IActionResult> OnPostFinischOrderAsync()
+        {
+            return Content(
+                "<script>alert('Your order has been placed successfully!'); window.location='/Index';</script>",
+                "text/html");
+
+        }
     }
 }
