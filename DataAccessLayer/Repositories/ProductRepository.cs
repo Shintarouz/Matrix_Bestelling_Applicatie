@@ -46,5 +46,45 @@ namespace DataAccessLayer.Repositories
             _context.Products.Update(product);
             _context.SaveChanges();
         }
+        public List<Product> SearchProducts(string search)
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .Where(p =>
+                    p.Name.Contains(search) ||
+                    p.Description.Contains(search) ||
+                    p.Category.Name.Contains(search) ||
+                    p.Price.ToString().Contains(search))
+                .ToList();
+        }
+        public List<Product> GetProductsLowToHigh()
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .OrderBy(p => p.Price)
+                .ToList();
+        }
+        public List<Product> GetProductsHighToLow()
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .OrderByDescending(p => p.Price)
+                .ToList();
+        }
+        public List<Product> FilterCategory(int? categoryId)
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .Where(p => !categoryId.HasValue || p.CategoryId == categoryId)
+                .ToList();
+        }
+        public List<Product> FilterPrice(decimal min, decimal? max)
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Price >= min && (!max.HasValue || p.Price <= max))
+                .OrderByDescending(p => p.Price)
+                .ToList();
+        }
     }
 }

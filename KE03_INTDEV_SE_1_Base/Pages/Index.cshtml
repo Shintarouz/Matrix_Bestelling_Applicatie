@@ -110,7 +110,44 @@
             </div>
         </aside>
 
-        <section class="product-section">
+        <aside class="filter-sidebar">
+
+            <h3>Filters</h3>
+            <div class="input-group">
+                <label for="SearchInputProduct">Search</label>
+                <input id="SearchInputProduct" type="text" placeholder="Zoek producten...">
+            </div>
+            <button id="sortLowToHigh">
+                Price Low → High
+            </button>
+
+            <button id="sortHighToLow">
+                Price High → Low
+            </button>
+
+            <hr>
+
+            <div class="price-filter">
+
+                <div class="input-group">
+                    <label for="SearchLowestPrice">Minimum Price</label>
+                    <input id="SearchLowestPrice"
+                           type="number"
+                           placeholder="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="SearchHighestPrice">Maximum Price</label>
+                    <input id="SearchHighestPrice"
+                           type="number">
+                </div>
+
+            </div>
+            <p id="priceError"></p>
+  
+        </aside>
+
+        <section class="product-section" id="ProductContainer">
 
             @foreach (var product in Model.Products)
             {
@@ -216,6 +253,5 @@
 
 </body>
 
-<script src="~/js/script.js"></script>
-
 </html>
+<script src="~/js/script.js"></script>

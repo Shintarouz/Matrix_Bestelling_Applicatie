@@ -9,6 +9,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 {
     public class ProductModel : PageModel
     {
+
         private readonly IProductRepository _productRepository;
         public Product Product { get; set; }
         public ProductModel(IProductRepository productRepository)

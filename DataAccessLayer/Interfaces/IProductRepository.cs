@@ -11,12 +11,23 @@ namespace DataAccessLayer.Interfaces
     {
         public IEnumerable<Product> GetAllProducts();
 
-        public Product? GetProductById(int id);
 
         public void AddProduct(Product product);
 
         public void UpdateProduct(Product product);
 
         public void DeleteProduct(Product product);
+
+        Product GetProductById(int id);
+
+        List<Product> SearchProducts(string searchedProduct);
+
+        List<Product> GetProductsLowToHigh();
+
+        List<Product> GetProductsHighToLow();
+
+        List<Product> FilterPrice(decimal min, decimal? max);
+
+        List<Product> FilterCategory(int? categoryId);
     }
 }
