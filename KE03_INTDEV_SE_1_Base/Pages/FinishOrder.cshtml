@@ -1,5 +1,5 @@
 ﻿@page
-@model KE03_INTDEV_SE_1_Base.Pages.SearchModel
+@model KE03_INTDEV_SE_1_Base.Pages.FinishOrderModel
 
 
 <script src="@Url.Content("~/js/CheckoutScript.js")"></script>
@@ -68,9 +68,13 @@
         </button>
     </div>
 
-    <div>
-        <button class="change-btn">
-            Finish payment
-        </button>
-    </div>
+
+
+        <form method="post" asp-page-handler="FinischOrder">
+            <button type="submit" class="change-btn">
+                Finish payment
+            </button>
+        </form>
+
+    
 </section>
