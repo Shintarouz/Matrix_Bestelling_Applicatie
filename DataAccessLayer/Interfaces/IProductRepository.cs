@@ -19,7 +19,7 @@ namespace DataAccessLayer.Interfaces
         public void DeleteProduct(Product product);
 
         Product GetProductById(int id);
-
+        //door timo gemaakt
         List<Product> SearchProducts(string searchedProduct);
 
         List<Product> GetProductsLowToHigh();

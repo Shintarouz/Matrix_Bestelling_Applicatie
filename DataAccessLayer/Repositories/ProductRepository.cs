@@ -46,6 +46,7 @@ namespace DataAccessLayer.Repositories
             _context.Products.Update(product);
             _context.SaveChanges();
         }
+        //door timo gemaakt
         public List<Product> SearchProducts(string search)
         {
             return _context.Products
@@ -57,6 +58,7 @@ namespace DataAccessLayer.Repositories
                     p.Price.ToString().Contains(search))
                 .ToList();
         }
+        //door timo gemaakt
         public List<Product> GetProductsLowToHigh()
         {
             return _context.Products
@@ -64,6 +66,7 @@ namespace DataAccessLayer.Repositories
                 .OrderBy(p => p.Price)
                 .ToList();
         }
+        //door timo gemaakt
         public List<Product> GetProductsHighToLow()
         {
             return _context.Products
@@ -71,6 +74,7 @@ namespace DataAccessLayer.Repositories
                 .OrderByDescending(p => p.Price)
                 .ToList();
         }
+        //door timo gemaakt
         public List<Product> FilterCategory(int? categoryId)
         {
             return _context.Products
@@ -78,6 +82,7 @@ namespace DataAccessLayer.Repositories
                 .Where(p => !categoryId.HasValue || p.CategoryId == categoryId)
                 .ToList();
         }
+        //door timo gemaakt
         public List<Product> FilterPrice(decimal min, decimal? max)
         {
             return _context.Products

@@ -24,7 +24,7 @@ function changeQty(button, change) {
 
     input.value = value;
 }
-
+//door timo gemaakt
 const searchInput = document.getElementById("SearchInputProduct");
 if (searchInput) {
     searchInput.addEventListener("keydown", function (event) {
@@ -41,7 +41,7 @@ if (searchInput) {
         }
     });
 }
-
+//door timo gemaakt
 const sortLowToHigh = document.getElementById("sortLowToHigh");
 if (sortLowToHigh) {
     sortLowToHigh.addEventListener("click", function () {
@@ -51,7 +51,7 @@ if (sortLowToHigh) {
             .catch(console.error);
     });
 }
-
+//door timo gemaakt
 const sortHighToLow = document.getElementById("sortHighToLow");
 if (sortHighToLow) {
     sortHighToLow.addEventListener("click", function () {
@@ -64,7 +64,7 @@ if (sortHighToLow) {
 
 const minInput = document.getElementById("SearchLowestPrice");
 const maxInput = document.getElementById("SearchHighestPrice");
-
+//door timo gemaakt
 function filterPrice() {
     const min = Number(minInput.value) || 0;
     const maxRaw = maxInput.value.trim();
@@ -90,6 +90,7 @@ function filterPrice() {
 
 if (minInput) minInput.addEventListener("input", filterPrice);
 if (maxInput) maxInput.addEventListener("input", filterPrice);
+//door timo gemaakt
 function filterCategory(categoryId) {
     const url = `/Index?handler=ProductReturnerByCategory&categoryId=${categoryId ?? ""}`;
 
@@ -99,7 +100,7 @@ function filterCategory(categoryId) {
         .catch(console.error);
 }
 
-
+//door timo gemaakt
 function renderProducts(products) {
 
     const container = document.getElementById("ProductContainer");

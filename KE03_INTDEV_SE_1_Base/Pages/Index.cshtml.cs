@@ -135,21 +135,22 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             CartTotal = CartItems.Sum(x => x.Price * x.Quantity);
         }
+        //door timo gemaakt
         public JsonResult OnGetProductReturner(string searchedproduct)
         {
             return new JsonResult(_productRepository.SearchProducts(searchedproduct));
         }
-
+        //door timo gemaakt
         public JsonResult OnGetPLowToHigh()
         {
             return new JsonResult(_productRepository.GetProductsLowToHigh());
         }
-
+        //door timo gemaakt
         public JsonResult OnGetPHighToLow()
         {
             return new JsonResult(_productRepository.GetProductsHighToLow());
         }
-
+        //door timo gemaakt
         public JsonResult OnGetPHighToLowSlider(string min, string max)
         {
             decimal minVal = decimal.TryParse(min, System.Globalization.NumberStyles.Any,
@@ -160,7 +161,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             return new JsonResult(_productRepository.FilterPrice(minVal, maxVal));
         }
-
+        //door timo gemaakt
         public JsonResult OnGetProductReturnerByCategory(int? categoryId)
         {
             return new JsonResult(_productRepository.FilterCategory(categoryId));
