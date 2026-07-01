@@ -46,66 +46,76 @@
         </div>
 
     </header> *@
+    <section class="welcome-banner">
+        <div class="banner-content">
+            <h1>Welcome to Matrix Inc.</h1>
+            <p>Discover our weekly deals.</p>
+
+            <a href="#products" class="banner-btn">
+                Shop Now
+            </a>
+        </div>
+    </section>
 
     <main class="shop-layout">
         <aside class="category-sidebar">
             <div class="menu-item">
-                Badkamer & sanitair
+                Bathroom and Sanitary Facilities
 
                 <div class="submenu">
-                    <button>Douches</button>
+                    <button>Showers</button>
 
-                    <button>Toiletten</button>
+                    <button>Toilets</button>
 
-                    <button>Kranen</button>
+                    <button>Taps</button>
                 </div>
             </div>
 
             <div class="menu-item">
-                Keuken
+                Kitchen
 
                 <div class="submenu">
-                    <button>Keukens</button>
+                    <button>Kitchens</button>
 
-                    <button>Apparatuur</button>
+                    <button>Equipment</button>
 
                     <button>Accessoires</button>
                 </div>
             </div>
 
             <div class="menu-item">
-                Woonkamer
+                Living room
 
                 <div class="submenu">
-                    <button>Keukens</button>
+                    <button>Sofa's</button>
 
-                    <button>Apparatuur</button>
+                    <button>Lamps</button>
 
-                    <button>Accessoires</button>
+                    <button>Tabels</button>
                 </div>
             </div>
 
             <div class="menu-item">
-                Gast-Kamer
+                Guest room
 
                 <div class="submenu">
-                    <button>Keukens</button>
+                    <button>Beds</button>
 
-                    <button>Apparatuur</button>
+                    <button>Curtains</button>
 
-                    <button>Accessoires</button>
+                    <button>Rugs</button>
                 </div>
             </div>
 
             <div class="menu-item">
-                Tuin
+                Garden
 
                 <div class="submenu">
-                    <button>Keukens</button>
+                    <button>Flowers</button>
 
-                    <button>Apparatuur</button>
+                    <button>Tools</button>
 
-                    <button>Accessoires</button>
+                    <button>Chairs</button>
                 </div>
             </div>
         </aside>
@@ -148,44 +158,45 @@
         </aside>
 
         <section class="product-section" id="ProductContainer">
+        <section class="product-section" id="products">
 
             @foreach (var product in Model.Products)
             {
-                <div class="product">
-                    <a asp-page="/Products/Details"
-                    asp-route-id="@product.Id">
-                        <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
-                        <a asp-page="/Product" asp-route-id="@product.Id">
-                            <h2>@product.Name</h2>
-                        </a>
-                    </a>
+                <div class="product"
+                     onclick="location.href='@Url.Page("/Product", new { id = product.Id })'">
+
+                    <img src="~/images/product_@(product.Id).png" alt="@product.Name" />
+
+                    <h2>@product.Name</h2>
 
                     <p>@product.Description</p>
 
                     <p>€@product.Price</p>
 
-                    <form method="post" asp-page-handler="AddToCart">
+                    <form method="post"
+                          asp-page-handler="AddToCart"
+                          onclick="event.stopPropagation();">
+
                         <input type="hidden" name="productId" value="@product.Id" />
                         <input type="hidden" name="name" value="@product.Name" />
                         <input type="hidden" name="price" value="@product.Price" />
 
                         <div class="quantity-selector">
-
                             <input type="number"
-                            name="quantity"
-                            value="1"
-                            min="1"
-                            class="qty-input" />
+                                   name="quantity"
+                                   value="1"
+                                   min="1"
+                                   class="qty-input" />
 
+                            <button type="submit">
+                                Add to cart
+                            </button>
                         </div>
-                        <button type="submit">
-                            Add to cart
-                        </button>
+
                     </form>
+
                 </div>
             }
-
-        </section>
     </main>
 
     <div class="cart-sidebar" id="cart-sidebar">
@@ -243,7 +254,7 @@
         <div class="cart-buttons">
 
             <button class="checkout-button"onclick="window.location.href='/Checkout'">
-                Afrekenen
+                Pay
                
             </button>
 
