@@ -18,7 +18,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public List<CartItem> CartItems { get; set; } = new();
         public decimal CartTotal { get; set; }
         public int CartCount { get; set; }
-        public IList<Customer> Customers { get; set; }
+        public IList<Customer> Customers { get; set;
+        }
         public IList<Product> Products { get; set; }
         //public IList<Part> Parts { get; set; }
         public IndexModel(
@@ -134,5 +135,36 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             CartTotal = CartItems.Sum(x => x.Price * x.Quantity);
         }
+        public JsonResult OnGetProductReturner(string searchedproduct)
+        {
+            return new JsonResult(_productRepository.SearchProducts(searchedproduct));
+        }
+
+        public JsonResult OnGetPLowToHigh()
+        {
+            return new JsonResult(_productRepository.GetProductsLowToHigh());
+        }
+
+        public JsonResult OnGetPHighToLow()
+        {
+            return new JsonResult(_productRepository.GetProductsHighToLow());
+        }
+
+        public JsonResult OnGetPHighToLowSlider(string min, string max)
+        {
+            decimal minVal = decimal.TryParse(min, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out var m) ? m : 0;
+
+            decimal? maxVal = decimal.TryParse(max, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out var mx) ? mx : (decimal?)null;
+
+            return new JsonResult(_productRepository.FilterPrice(minVal, maxVal));
+        }
+
+        public JsonResult OnGetProductReturnerByCategory(int? categoryId)
+        {
+            return new JsonResult(_productRepository.FilterCategory(categoryId));
+        }
     }
 }
+
